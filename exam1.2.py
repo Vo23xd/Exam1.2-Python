@@ -34,11 +34,8 @@ class ChatBot:
     def print_history(self):
         return [{"питання": entry['питання'], "відповідь": entry['відповідь']} for entry in self.history]
 
-
-# Створення об'єкта чат-бота
 chat_bot = ChatBot()
 
-# Додавання власних правил
 chat_bot.add_rule("розклад роботи вихідного дня", "У вихідні ми працюємо з 10:00 до 16:00.")
 chat_bot.add_rule("послуги вихідного дня", "У вихідний день ми пропонуємо обслуговування клієнтів та консультації. Продажі та інші послуги недоступні.")
 chat_bot.add_rule("графік роботи_1", "Графік роботи з понеділка по п'ятницю з 9:00 до 18:00.")
@@ -55,18 +52,14 @@ print("Результат:", result)
 """
 
     try:
-        # Створення тимчасового файлу для виконання Python-коду
         with open('temp_script.py', 'w') as temp_script:
             temp_script.write(python_code)
-
-        # Виконання Python-коду
         result = subprocess.run(['python', 'temp_script.py'], capture_output=True, text=True)
         
         return result.stdout, result.stderr
     except Exception as e:
         return f'Помилка виконання Python-коду: {str(e)}', None
     finally:
-        # Видалення тимчасового файлу
         os.remove('temp_script.py')
 
 @app.route('/')
